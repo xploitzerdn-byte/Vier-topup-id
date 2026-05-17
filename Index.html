@@ -1,290 +1,224 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>ZerNism AI Code Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacked By ./ZerNism</title>
 
-<style>
-body{
-font-family:Arial,sans-serif;
-background:#161616;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
-color:white;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.login-box,
-.box{
-background:#000000;
-padding:30px;
-border-radius:30px;
-border:1px solid white;
-width:300px;
-box-sizing:border-box;
-}
+        body {
+            background-color: #000;
+            color: #ffffff;
+            font-family: sans-serif, Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(circle, #0d0d0d 10%, #000 100%);
+        }
 
-.box{
-display:none;
-max-width:800px;
-width:95%;
-height:90vh;
-overflow:auto;
-}
+        .container {
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+        }
 
-input,textarea,select{
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid white;
-border-radius:12px;
-background:#282626;
-color:white;
-box-sizing:border-box;
-}
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            display: inline-block;
+            border: 1px solid #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            background: #111;
+        }
 
-input::placeholder,
-textarea::placeholder{
-color:white;
-}
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-button{
-width:100%;
-padding:12px;
-background:#a60606;
-color:#ffffff;
-border:none;
-border-radius:12px;
-cursor:pointer;
-margin-top:8px;
-}
+        h1 {
+            font-size: 20px;
+            color: #ff0000;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            margin-bottom: 7px;
+            letter-spacing: 2px;
+        }
 
-button:hover{
-background:#8f0505;
-}
+        .quotes {
+            font-size: 10px;
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
 
-.password-box{
-position:relative;
-width:100%;
-}
+        .ascii-art {
+            color: #ffffff;
+            font-size: 10px;
+            white-space: pre;
+            margin: 5px 0 15px;
+            line-height: 1.2;
+            display: inline-block;
+            text-align: left;
+        }
 
-.password-box input{
-width:100%;
-height:42px;
-box-sizing:border-box;
-padding-right:60px;
-font-size:14px;
-}
+        .thanks-box {
+            border-top: 1px dashed #ff0000;
+            border-bottom: 1px dashed #ff0000;
+            padding: 15px;
+            margin-bottom: 25px;
+            background: rgba(15, 0, 0, 0.4);
+        }
 
-.toggle-btn{
-position:absolute;
-right:5px;
-top:50%;
-transform:translateY(-50%);
-width:auto;
-padding:6px 12px;
-font-size:14px;
-background:#a60606;
-color:#ffffff;
-border:none;
-cursor:pointer;
-}
+        .thanks-title {
+            color: #ff0000;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
 
-h2{
-text-align:center;
-margin-bottom:25px;
-}
+        .thanks-list {
+            font-size: 12px;
+            color: #aaaaaa;
+            word-spacing: 3px;
+            line-height: 1.5;
+        }
 
-textarea{
-height:100px;
-}
+        .btn-audio {
+            background: linear-gradient(45deg, #ff0000, #990000);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.out{
-background:#1a1a1a;
-padding:15px;
-margin-top:15px;
-border-radius:12px;
-display:none;
-border: 1px dashed #555;
-}
+        .btn-audio:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+            transform: scale(1.05);
+        }
 
-#outputCode{
-height: 200px;
-font-family: 'Courier New', Courier, monospace;
-font-size: 13px;
-background: #0d0d0d;
-}
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: inline-block;
+        }
 
-.footer{
-text-align:center;
-margin-top:35px;
-color:#666;
-font-size:10px;
-}
+        .playing {
+            animation: pulse 1s infinite alternate;
+        }
 
-small{
-color:#aaa;
-display: block;
-margin-top: 5px;
-}
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                opacity: 0.4;
+            }
 
-hr{
-border:1px solid #333;
-margin:20px 0;
-}
-
-iframe {
-width: 100%;
-height: 200px;
-background: white;
-border: none;
-border-radius: 12px;
-margin-top: 10px;
-}
-
-.status-ai {
-color: #00ff88;
-font-weight: bold;
-margin-bottom: 10px;
-display: block;
-}
-</style>
+            to {
+                transform: scale(1.3);
+                opacity: 1;
+                box-shadow: 0 0 10px #fff;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="login-box" id="loginPage">
+    <audio id="myMusic"
+        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        loop></audio>
 
-<div class="password-box">
-<input type="text" placeholder="Username" id="dinda123" maxlength="8">
-</div>
+    <div class="container">
 
-<div class="password-box">
-<input type="password" placeholder="Password" id="dindackp25" maxlength="7">
-<button type="button" class="toggle-btn" onclick="sensor()">lihat</button>
-</div>
+        <div class="avatar">
+            <img src="https://files.catbox.moe/f2sxst.jpg" alt="avatar">
+        </div>
 
-<button onclick="ceklogin()">Masuk</button>
+        <h1>Hacked By ./ZerNism</h1>
 
-</div>
+        <div class="quotes">
+            “Aku pernah percaya kalau semua luka bisa sembuh dengan cinta.
+            Tapi ternyata, cinta saja tidak cukup saat satu hati terus
+            berjuang sementara yang lain sibuk membuat jarak. Aku bertahan
+            terlalu lama, memaksa semuanya terlihat baik-baik saja, sampai
+            akhirnya sadar bahwa tidak semua yang diperjuangkan akan tetap
+            tinggal. Dan sekarang aku memilih pergi, bukan karena membenci,
+            tapi karena aku sudah terlalu lelah memperbaiki sesuatu yang
+            selalu hancur dengan cara yang sama.”
+        </div>
 
-<div class="box" id="dashboard">
+        <div class="ascii-art">
+ _____           _   _ _
+|__  /___ _ __  | \ | (_)
+  / // _ \ '__| |  \| |
+ /|  __/ |    | |\  | |
+/____\___|_|    |_| \_|_|
+        </div>
 
-<h2>AI Code Gen by ./ZerNism👑</h2>
+        <div class="thanks-box">
+            <div class="thanks-title">Thanks To Friends:</div>
 
-<div>
-<label><b>Pilih Bahasa Pemrograman:</b></label>
-<select id="bahasa">
-<option value="html">HTML / CSS / JS (Web)</option>
-<option value="python">Python (Script)</option>
-<option value="javascript">JavaScript (Node.js)</option>
-</select>
+            <div class="thanks-list">
+                pasko cyber rexor - traser sec team - Tegal cyber team
+            </div>
+        </div>
 
-<label><b>Deskripsikan Kodingan yang Kamu Mau:</b></label>
-<textarea id="promptAI" placeholder="Contoh: Bikin halaman login hacker keren, atau script bot telegram asinkron..."></textarea>
+        <div class="footer-link">
+            <button class="btn-audio" onclick="togglePlay()" id="playBtn">
+                <span class="pulse-dot"></span>
+                [ TAP TO PLAY ]
+            </button>
+        </div>
 
-<button onclick="generateAICode()">✨ Generate Code</button>
+    </div>
 
-<!-- AREA HASIL AI -->
-<div id="hasilAI" class="out">
-<span class="status-ai">🤖 ./ZerNism-AI Engine:</span>
-<textarea id="outputCode" readonly></textarea>
+    <script>
+        const music = document.getElementById("myMusic");
+        const btn = document.getElementById("playBtn");
 
-<button onclick="salinKode()" class="btn-gray" style="background:#444; margin-bottom: 10px;">📋 Salin Kode</button>
+        function togglePlay() {
 
-<!-- Tempat Preview Khusus HTML -->
-<div id="previewContainer" style="display:none;">
-<hr>
-<b>Live Preview:</b>
-<iframe id="previewFrame"></iframe>
-</div>
-</div>
-</div>
+            if (music.paused) {
 
-<div class="footer">tool by ./ZerNism👑 • vibe coding</div>
+                music.volume = 0.6;
+                music.play();
 
-</div>
+                btn.innerHTML =
+                    '<span class="pulse-dot playing"></span> MUSIC ON';
 
-<script>
+            } else {
 
-function ceklogin(){
-let user=document.getElementById("dinda123").value;
-let password=document.getElementById("dindackp25").value;
+                music.pause();
 
-if(user.toLowerCase()=="dinda123" && password=="dinda25"){
-document.getElementById("loginPage").style.display="none";
-document.getElementById("dashboard").style.display="block";
-}else{
-alert("Username atau password salah!");
-}
-}
-
-function sensor(){
-let x=document.getElementById("dindackp25");
-if(x.type==="password"){
-x.type="text";
-}else{
-x.type="password";
-}
-}
-
-// Logika AI Simulator
-function generateAICode(){
-var prompt = document.getElementById("promptAI").value.toLowerCase();
-var bahasa = document.getElementById("bahasa").value;
-var outputBox = document.getElementById("outputCode");
-var hasilContainer = document.getElementById("hasilAI");
-var previewContainer = document.getElementById("previewContainer");
-
-if(!prompt){
-alert("Isi prompt/deskripsinya dulu!");
-return;
-}
-
-document.getElementById("hasilAI").style.display = "block";
-outputBox.value = "Sedang memikirkan kode terbaik... ⚡";
-previewContainer.style.display = "none";
-
-setTimeout(function(){
-var hasilKode = "";
-
-if(bahasa === "html"){
-if(prompt.includes("login") || prompt.includes("hacker")){
-hasilKode = `<!-- Generated by ./ZerNism AI -->\n<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { background: #000; color: #00ff00; font-family: monospace; text-align: center; padding-top: 50px; }\n  .box { border: 1px solid #00ff00; display: inline-block; padding: 20px; box-shadow: 0 0 15px #00ff00; }\n  input { background: #111; color: #00ff00; border: 1px solid #00ff00; padding: 8px; margin: 5px; }\n  button { background: #00ff00; color: #000; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; }\n</style>\n</head>\n<body>\n<div class="box">\n  <h2>ACCESS DENIED - LOGIN REQUIRED</h2>\n  <input type="text" placeholder="Username"><br>\n  <input type="password" placeholder="Password"><br>\n  <button onclick="alert('Exploit Sent!')">BYPASS</button>\n</div>\n</body>\n</html>`;
-} else {
-hasilKode = `<!-- Generated by ./ZerNism AI -->\n<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { background: #222; color: #fff; font-family: sans-serif; text-align: center; }\n  .card { background: #333; margin: 50px auto; width: 300px; padding: 20px; border-radius: 10px; }\n</style>\n</head>\n<body>\n  <div class="card">\n    <h1>Custom Web AI</h1>\n    <p>Prompt: "${prompt}"</p>\n  </div>\n</body>\n</html>`;
-}
-
-// Aktifkan Live Preview khusus HTML
-previewContainer.style.display = "block";
-var blob = new Blob([hasilKode], {type: "text/html"});
-document.getElementById("previewFrame").src = URL.createObjectURL(blob);
-
-} else if(bahasa === "python") {
-if(prompt.includes("bot") || prompt.includes("telegram") || prompt.includes("async")){
-hasilKode = `# Generated by ./ZerNism AI\nimport asyncio\nfrom aiogram import Bot, Dispatcher, types\n\nAPI_TOKEN = 'TOKEN_BOT_KAMU'\nbot = Bot(token=API_TOKEN)\ndp = Dispatcher(bot)\n\n@dp.message_handler(commands=['start'])\nasync def send_welcome(message: types.Message):\n    await message.reply("Halo! Bot Asinkron ./ZerNism siap digunakan.")\n\nasync def main():\n    await dp.start_polling()\n\nif __name__ == '__main__':\n    asyncio.run(main())`;
-} else {
-hasilKode = `# Generated by ./ZerNism AI\nimport os\n\ndef main():\n    print("Menjalankan task untuk: ${prompt}")\n\nif __name__ == "__main__":\n    main()`;
-}
-} else if(bahasa === "javascript") {
-hasilKode = `// Generated by ./ZerNism AI\nconst fs = require('fs');\n\nconsole.log("Memproses permintaan: ${prompt}");\n// Kode automation kamu di sini\n`;
-}
-
-outputBox.value = hasilKode;
-}, 1200); // Efek loading 1.2 detik biar berasa mikir
-}
-
-function salinKode(){
-var copyText = document.getElementById("outputCode");
-copyText.select();
-navigator.clipboard.writeText(copyText.value);
-alert("Kode AI berhasil disalin!");
-}
-
-</script>
+                btn.innerHTML =
+                    '<span class="pulse-dot"></span> MUSIC OFF';
+            }
+        }
+    </script>
 
 </body>
-  </html>
-  
+</html>
